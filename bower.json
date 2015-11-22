@@ -1,0 +1,24 @@
+{
+  "name": "zheater",
+  "description": "расчет печи",
+  "main": "gulpfile.js",
+  "authors": [
+    "deLiero"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "heater"
+  ],
+  "homepage": "https://github.com/deLiero/zHeater",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "normalize.css#~3.0.3"
+  }
+}
