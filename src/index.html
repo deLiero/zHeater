@@ -2,15 +2,15 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>zHeater 0.1.0</title>
+  <title>zHeater 0.2.0</title>
   <link rel="stylesheet" href="style/main.css"/>
 </head>
 <body>
   <div class="page">
-    <form id="calc" class="calc" action="">
+    <form id="form" class="form_" action="">
       <div>
         <label for="D">Внутренный диаметр</label>
-        <input id="D" type="text" autocomplete="off" name="diameter"/>
+        <input id="D" type="range" value="400" min="300" max="800" name="diameter"/>
       </div>
       <div>
         <label for="H">Высота заготовки</label>
@@ -29,8 +29,7 @@
         <input type="submit" value="расчет"/>
       </div>
     </form>
-
-    <script src="js/zHeater.js"></script>
   </div>
+  <script src="js/zHeater.js"></script>
 </body>
 </html>
