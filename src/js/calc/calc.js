@@ -1,5 +1,14 @@
 zHeater.Calc = (function () {
 
+    Number.prototype._z_roundTo = function (n) {
+        n = parseInt(n);
+        if (isNaN(n)) {
+            return this;
+        }
+        n = Math.pow(10, n);
+        return Math.round(this * n)/n;
+    };
+
     function Calc(prop) {
         this.D = prop.D || 0;      //внут. диаметр корпуса (input)
         this.H = prop.H || 0;      //высота корпуса (input)
@@ -36,7 +45,7 @@ zHeater.Calc = (function () {
      * @private
      */
     function _d(Dout) {
-        return 0.5 * Dout;
+        return (0.5 * Dout)._z_roundTo(2);
     }
 
     /**
@@ -46,7 +55,7 @@ zHeater.Calc = (function () {
      * @private
      */
     function _Dout(S) {
-        return Math.round(Math.sqrt(4*S/Math.PI)*10);
+        return (Math.sqrt(4*S/Math.PI)*10)._z_roundTo(2);
     }
 
     /**
@@ -56,7 +65,7 @@ zHeater.Calc = (function () {
      * @private
      */
     function _S(E) {
-        return 1.75 * E;
+        return (1.75 * E)._z_roundTo(2);
     }
 
     /**
@@ -67,7 +76,7 @@ zHeater.Calc = (function () {
      * @private
      */
     function _E(M, e) {
-        return Math.round(M * e);
+        return (M * e)._z_roundTo(2);
     }
 
     /**
@@ -78,7 +87,7 @@ zHeater.Calc = (function () {
      * @private
      */
     function _M(Vf, mf) {
-        return Vf * mf;
+        return (Vf * mf)._z_roundTo(2);
     }
 
     /**
@@ -91,7 +100,7 @@ zHeater.Calc = (function () {
     function _Vf(D, Hf) {
         D = D/100;
         Hf = Hf/100;
-        return Math.round(Math.PI*D*D*Hf/4);
+        return (Math.PI*D*D*Hf/4)._z_roundTo(2);
     }
 
     /**
@@ -101,7 +110,7 @@ zHeater.Calc = (function () {
      * @private
      */
     function _Hf(H) {
-        return 2*H/3;
+        return (2*H/3)._z_roundTo(2);
     }
 
     /**
@@ -129,7 +138,7 @@ zHeater.Calc = (function () {
      * @private
      */
     function _C(D) {
-        return 0.05 * D;
+        return (0.05 * D)._z_roundTo(2);
     }
 
     /**
@@ -177,7 +186,6 @@ zHeater.Calc = (function () {
             return 2.5;
         }
     }
-
 
     var p = Calc.prototype;
 

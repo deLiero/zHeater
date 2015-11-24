@@ -17,9 +17,17 @@ zHeater.Form = (function () {
         this.inputs.thickness = document.getElementById("Tk");
 
         form.onsubmit = function (e) {
-            var D = parseFloat(self.inputs.diameter.value);
-            alert(typeof D + " " + D);
-            //e.preventDefault();
+            e.preventDefault();
+            var D = parseInt(self.inputs.diameter.value);
+            var H = parseInt(self.inputs.height.value);
+            var gap = parseFloat(self.inputs.gap.value);
+            var Tk = parseFloat(self.inputs.thickness.value);
+            var calc = new zHeater.Calc({D: D, H: H, gap: gap, Tk: Tk});
+            console.log(calc.calculate());
+            zHeater.evt.trigger("bla", [D, H, gap, Tk]);
+            console.log(zHeater.evt);
+            zHeater.evt.remove("bla1");
+            console.log(zHeater.evt);
             return false;
         };
     }
