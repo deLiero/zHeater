@@ -17,17 +17,22 @@ zHeater.Form = (function () {
         this.inputs.thickness = document.getElementById("Tk");
 
         form.onsubmit = function (e) {
-            e.preventDefault();
+            //e.preventDefault();
             var D = parseInt(self.inputs.diameter.value);
             var H = parseInt(self.inputs.height.value);
             var gap = parseFloat(self.inputs.gap.value);
             var Tk = parseFloat(self.inputs.thickness.value);
-            var calc = new zHeater.Calc({D: D, H: H, gap: gap, Tk: Tk});
-            console.log(calc.calculate());
-            zHeater.evt.trigger("bla", [D, H, gap, Tk]);
-            console.log(zHeater.evt);
-            zHeater.evt.remove("bla1");
-            console.log(zHeater.evt);
+
+            // проверка на валидность данных
+            if (isNaN(D) || isNaN(H) || isNaN(gap) || isNaN(Tk)) {
+                alert("НЕ КОРРЕКТНЫЕ ДАННЫЕ!\n\n"
+                + "Вн. диаметр: " + D +";\n" + "Высота заготовки: "
+                + H +";\n" + "Зазор: "
+                + gap +";\n" + "Толщина заготовки: "
+                + Tk +";\n");
+            } else {
+                zHeater.evt.trigger("form-ready", [D, H, gap, Tk]);
+            }
             return false;
         };
     }

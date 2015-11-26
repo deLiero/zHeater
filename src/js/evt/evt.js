@@ -2,56 +2,67 @@
 // модуль обеспечивает комуникацию между остальными модулями
 //
 
-zHeater.evt = {};
+zHeater.evt = (function () {
 
-// содержит в себе обработчики событий системы
-zHeater.evt.pool = {};
+    var pool = {}; // содержит в себе обработчики событий системы
 
-// возбуждает событие type
-// объект события не создается
-// передаются только параметры в виде массива args
-zHeater.evt.trigger = function(type, args) {
-    var _pool = zHeater.evt.pool[type];
-    if (!_pool) {
-        return;
-    }
-    for (var i = 0, max = _pool.length; i < max; i++) {
-        _pool[i].apply(_pool[i], args);
-    }
-};
+    //добавляет обработчик на событие
+    function on(type, fn) {
+        var _pool = pool[type];
 
-//добавляет обработчик на событие
-zHeater.evt.add = function (type, fn) {
-    var _pool = zHeater.evt.pool[type];
-
-    if (!_pool) {
-        zHeater.evt.pool[type] = [];
-        zHeater.evt.pool[type].push(fn);
-    } else {
-        _pool.push(fn);
-    }
-};
-
-// удаляет событие type, либо обработчик события fn
-zHeater.evt.remove = function(type, fn) {
-    if (!type) {
-        return;
-    }
-
-    if (!type && !fn) {
-        return;
-    }
-
-    if (type && !fn) {
-        delete zHeater.evt.pool[type];
-        return;
-    }
-
-    if (type && fn) {
-        var index = zHeater.evt.pool[type].indexOf(fn);
-        if (index < 0) {
+        if(typeof fn !== "function") {
+            console.warn("EVT module: CALLBACK is not FUNCTION", fn );
             return;
         }
-        zHeater.evt.pool[type].slice(index, 1);
+
+        if (!_pool) {
+            pool[type] = [];
+            pool[type].push(fn);
+        } else {
+            _pool.push(fn);
+        }
     }
-};
+
+    // удаляет событие type, либо обработчик события fn
+    function remove(type, fn) {
+        if (!type) {
+            return;
+        }
+
+        if (!type && !fn) {
+            return;
+        }
+
+        if (type && !fn) {
+            delete pool[type];
+            return;
+        }
+
+        if (type && fn) {
+            var index = pool[type].indexOf(fn);
+            if (index < 0) {
+                return;
+            }
+            pool[type].slice(index, 1);
+        }
+    }
+
+    // возбуждает событие type
+    // объект события не создается
+    // передаются только параметры в виде массива args
+    function trigger(type, args) {
+        var _pool = pool[type];
+        if (!_pool) {
+            return;
+        }
+        for (var i = 0, max = _pool.length; i < max; i++) {
+            _pool[i].apply(_pool[i], args);
+        }
+    }
+
+    return {
+        on: on,
+        remove: remove,
+        trigger: trigger
+    };
+})();

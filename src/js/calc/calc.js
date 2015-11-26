@@ -14,6 +14,13 @@ zHeater.Calc = (function () {
         this.H = prop.H || 0;      //высота корпуса (input)
         this.Tk = prop.Tk || 0;    //толщина листа корпуса (input)
         this.gap = prop.gap || 0;  //зазор между трубой и воротником ( не более 2,5мм) (input)
+
+        var self = this;
+
+        zHeater.evt.on("form-ready", function (D, H, gap, Tk) {
+            self.setup(D, H, gap, Tk);
+            self.calculate();
+        });
     }
 
     //private functions
@@ -209,7 +216,16 @@ zHeater.Calc = (function () {
         result.L = _L(this.gap);
         result.q = _q(result.L);
 
+        console.log(result);
+
         return result;
+    };
+
+    p.setup = function (D, H, gap, Tk) {
+        this.D = D || this.D;
+        this.H = H || this.H;
+        this.gap = gap || this.gap;
+        this.Tk = Tk || this.Tk;
     };
 
     return Calc;
