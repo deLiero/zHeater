@@ -1,6 +1,10 @@
 zHeater.Printer = (function () {
     function Printer(canvas) {
-        //TODO code here
+        var self = this;
+
+        zHeater.evt.on("calculate-ready", function(result) {
+            alert(result);
+        })
     }
 
     return Printer;

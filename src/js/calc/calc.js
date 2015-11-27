@@ -196,6 +196,11 @@ zHeater.Calc = (function () {
 
     var p = Calc.prototype;
 
+    /**
+     * Выполняет расчет
+     * Генерирует событие calculate-ready
+     * @returns {{}}
+     */
     p.calculate = function () {
         var result = {};
 
@@ -217,6 +222,7 @@ zHeater.Calc = (function () {
         result.q = _q(result.L);
 
         console.log(result);
+        zHeater.evt.trigger("calculate-ready", [result]);
 
         return result;
     };

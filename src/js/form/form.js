@@ -16,6 +16,11 @@ zHeater.Form = (function () {
         this.inputs.gap = document.getElementById("gap");
         this.inputs.thickness = document.getElementById("Tk");
 
+        //
+        // Обработчик формы
+        // Генерирует событие form-ready
+        // В качестве аргументов события передает введенные данные
+        //
         form.onsubmit = function (e) {
             //e.preventDefault();
             var D = parseInt(self.inputs.diameter.value);
