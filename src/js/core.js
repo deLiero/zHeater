@@ -1,13 +1,4 @@
 // core
-
-var zHeater = function () {
-  return {
-      "Core": function () {
-
-          var core = {
-
-          };
-          return core;
-      }
-  }
-};
+function Core(require, exports) {
+    var Sandbox = require("Sandbox");
+}
