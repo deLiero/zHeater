@@ -5,7 +5,7 @@
 (function (window, sandboxed_modules) {
     var modules = {},//объект хранит в себе инициилизированные модули
         initialized_modules = {},
-         // задача require отдавать уже проинициализированный экземпляр
+    // задача require отдавать уже проинициализированный экземпляр
         require = function (moduleName) {
             var module = modules[moduleName],
                 output;
@@ -21,7 +21,7 @@
             initialized_modules[moduleName] = 1;
             modules[moduleName] = output.exports;
 
-            if(!module) {
+            if (!module) {
                 // если модуля нет, то найти в глобальной области. Например: jQuery
                 module = window[moduleName];
             } else if (typeof module == "function") {
@@ -53,6 +53,7 @@
     "Core": function Core(require, exports) {
         console.log("core", exports);
         var Sandbox = require("Sandbox");
+        // var $ = require("jQuery");
 
         var _exports = {
             getSandbox: function () {
