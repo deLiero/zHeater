@@ -32,7 +32,7 @@ function Core(require, exports) {
          */
         init: function (data) {
             data = data || {};
-            this.descriptor = data.descriptor || require("modules");
+            this.descriptor = data.descriptor || require("descriptor");
             this.descriptor.modules = this.descriptor.modules || [];
             this.descriptor.layout = this.descriptor.layout || {};
 
