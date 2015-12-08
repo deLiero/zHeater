@@ -65,8 +65,10 @@
             }
         };
 
-        for (var i in _exports) {
-            exports[i] = _exports[i];
+        for (var key in _exports) {
+            if (_exports.hasOwnProperty(key)) {
+                exports[key] = _exports[key];
+            }
         }
     },
     "Sandbox": function(require) {
