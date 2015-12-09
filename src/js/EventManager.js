@@ -4,7 +4,7 @@
 // внес небольшие изменения под свои нужды
 //
 
-function EventManager(require) {
+"EventManager": function EventManager(require) {
 
     /**
      * @namespace
@@ -192,4 +192,4 @@ function EventManager(require) {
             return this;
         }
     }
-}
+},

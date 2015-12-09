@@ -20,7 +20,7 @@ function Calculator(require, exports, module) {
 
         var self = this;
 
-        zHeater.evt.on("form-ready", function (D, H, gap, Tk) {
+        this.sandbox.bind("form:ready", function (D, H, gap, Tk) {
             self.setup(D, H, gap, Tk);
             self.calculate();
         });

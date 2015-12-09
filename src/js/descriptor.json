@@ -1,4 +1,4 @@
-{
-  "modules": ["Calculator"],
-  "layout": {}
+"descriptor": {
+"modules": [],
+"layout": {}
 }

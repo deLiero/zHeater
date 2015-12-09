@@ -39,7 +39,6 @@
                 break;
             case "object":
                 for (var moduleName in misc) {
-                    console.log(typeof misc[moduleName]);
                     initialized_modules[moduleName] = 0;
                     modules[moduleName] = misc[moduleName];
                 }
@@ -50,29 +49,12 @@
     };
     return _;
 })(window, {"moduleName":true})({
-    "Core": function Core(require, exports) {
-        console.log("core", exports);
-        var Sandbox = require("Sandbox");
-        // var $ = require("jQuery");
-
-        var _exports = {
-            getSandbox: function () {
-                return new Sandbox();
-            },
-            init: function () {
-                alert("HW");
-                //return this;
-            }
-        };
-
-        for (var key in _exports) {
-            if (_exports.hasOwnProperty(key)) {
-                exports[key] = _exports[key];
-            }
-        }
-    },
-    "Sandbox": function(require) {
-
+    //= core.js
+    //= EventManager.js
+    //= Sandbox.js
+    "descriptor": {
+        "modules": [],
+        "layout": {}
     }
 })(function (require, exports, module) {
     console.log(require("Core"));

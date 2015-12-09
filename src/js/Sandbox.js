@@ -1,4 +1,4 @@
-function Sandbox (require) {
+"Sandbox": function Sandbox (require) {
     var Core = require("Core"),
         EventManager = require("EventManager");
 
@@ -65,4 +65,4 @@ function Sandbox (require) {
 
     // exports
     return Sandbox;
-}
+},

@@ -1,5 +1,5 @@
 // core
-function Core(require, exports) {
+"Core": function Core(require, exports) {
     var Sandbox      =  require("Sandbox"),
         EventManager =  require("EventManager");
 
@@ -45,8 +45,8 @@ function Core(require, exports) {
          * @private
          */
         _initModules: function () {
-            for (var i = 0, max = this.modules.length; i < max; i++) {
-                this.initModule(this.modules[i]);
+            for (var i = 0, max = this.descriptor.modules.length; i < max; i++) {
+                this.initModule(this.descriptor.modules[i]);
             }
         },
 
@@ -109,4 +109,20 @@ function Core(require, exports) {
             return null;
         }
     };
-}
+
+    var coreExports = {
+        trigger:       bind(EventManager.trigger, EventManager),
+        bind:          bind(EventManager.bind, EventManager),
+        unbind:        bind(EventManager.bind, EventManager),
+        unbindAllNs:   bind(EventManager.unbindAllNs, EventManager),
+
+        init:          bind(Core.init, Core),
+        destroyModule: bind(Core.destroyModule, Core),
+        initModule:    bind(Core.initModule, Core),
+        getBox:        bind(Core.getBox, Core)
+    };
+
+    for (var i in coreExports) {
+        exports[i] = coreExports[i];
+    }
+},
