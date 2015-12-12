@@ -35,6 +35,7 @@
             this.descriptor = data.descriptor || require("descriptor");
             this.descriptor.modules = this.descriptor.modules || [];
             this.descriptor.layout = this.descriptor.layout || {};
+            this.descriptors = data.descriptors || require("descriptors");
 
             this._initModules();
 
@@ -58,8 +59,7 @@
             if (this.sandboxes[name]) {
                 return this;
             }
-
-            var sandbox = new Sandbox(name);
+            var sandbox = new Sandbox(this.descriptors[name]);
             var module = require(name);
             this.sandboxes[name] = sandbox;
 
@@ -107,6 +107,43 @@
                 return document.getElementById(elementId);
             }
             return null;
+        },
+
+        /**
+         * объект с методами DOM
+         *
+         * @type Object]
+         */
+        dom: {
+            /**
+             *
+             * возвращает елемент соответвующий id
+             *
+             * @param id
+             * @return {HTMLElement|null}
+             */
+            getById: function (id) {
+                if (id) {
+                    return document.getElementById(id);
+                } else {
+                    return null;
+                }
+            },
+            //TODO задокументировать
+            on: function (elem, eventName, callback) {
+                elem.addEventListener(eventName, callback, true);
+            }
+        },
+
+        //TODO задокументировать
+        event: {
+            stop: function (e) {
+                if (e.preventDefault) {
+                    e.preventDefault();
+                } else {
+                    e.returnValue = false;
+                }
+            }
         }
     };
 
@@ -119,8 +156,14 @@
         init:          bind(Core.init, Core),
         destroyModule: bind(Core.destroyModule, Core),
         initModule:    bind(Core.initModule, Core),
-        getBox:        bind(Core.getBox, Core)
+        getBox:        bind(Core.getBox, Core),
     };
+
+    coreExports.dom = Core.dom;
+    coreExports.event = Core.event;
+
+    //TODO delete coreExports._sb
+    coreExports._sb = Core.sandboxes;
 
     for (var i in coreExports) {
         exports[i] = coreExports[i];

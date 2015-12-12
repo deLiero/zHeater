@@ -44,19 +44,30 @@
                 }
                 break;
         }
-        console.log(modules);
         return _;
     };
+
+    //TODO delete window._m, window._r
+    window._m = modules;
+    window._r = require;
+
     return _;
 })(window, {"moduleName":true})({
     //= core.js
     //= EventManager.js
     //= Sandbox.js
     "descriptor": {
-        "modules": [],
-        "layout": {}
-    }
+        "modules": ["Form", "Calculator"],
+        "layout": {
+            "Form": "form"
+        }
+    },
+    "descriptors": {
+        "Form": {name: "Form"}
+    },
+    //= Calculator.js
+    //= Form.js
 })(function (require, exports, module) {
-    console.log(require("Core"));
+    console.log(1);
     require("Core").init();
 }); // в качестве параметра передать ядро приложения

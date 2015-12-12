@@ -1,4 +1,4 @@
-function Calculator(require, exports, module) {
+"Calculator": function Calculator(require, exports, module) {
 
     Number.prototype._z_roundTo = function (n) {
         n = parseInt(n);
@@ -11,8 +11,10 @@ function Calculator(require, exports, module) {
 
     var Calculator = function (sandbox, prop) {
 
+        var self = this;
         this.sandbox = sandbox;
 
+        prop = prop || {};
         this.D = prop.D || 0;      //внут. диаметр корпуса (input)
         this.H = prop.H || 0;      //высота корпуса (input)
         this.Tk = prop.Tk || 0;    //толщина листа корпуса (input)
@@ -20,9 +22,9 @@ function Calculator(require, exports, module) {
 
         var self = this;
 
-        this.sandbox.bind("form:ready", function (D, H, gap, Tk) {
-            self.setup(D, H, gap, Tk);
-            self.calculate();
+        this.sandbox.bind("form:ready", function (e) {
+            self.setup(e.data.d, e.data.h, e.data.g, e.data.tk);
+            console.log(self.calculate());
         });
     };
 
@@ -197,14 +199,14 @@ function Calculator(require, exports, module) {
         }
     }
 
-    var p = Calc.prototype;
+    var p = Calculator.prototype;
 
     /**
      * Выполняет расчет
      * Генерирует событие calculate-ready
      * @returns {Object}
      */
-    p.calculate = function () {
+    p.calculate = function () {7
         var result = {};
 
         result.D = this.D;
@@ -224,8 +226,7 @@ function Calculator(require, exports, module) {
         result.L = _L(this.gap);
         result.q = _q(result.L);
 
-        console.log(result);
-        this.sandbox.trigger("calculate:ready", [result]);
+        this.sandbox.trigger("calculate:ready", "ВСЁ ОК! Смотри консоль!");
 
         return result;
     };
@@ -237,5 +238,5 @@ function Calculator(require, exports, module) {
         this.Tk = Tk || this.Tk;
     };
 
-    return Calc;
-};
+    return Calculator;
+},

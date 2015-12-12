@@ -1,4 +1,6 @@
 "descriptor": {
-"modules": [],
-"layout": {}
+  "modules": [],
+  "layout": {
+    "Form": "form"
+  }
 }

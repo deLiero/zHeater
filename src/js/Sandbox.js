@@ -1,6 +1,7 @@
-"Sandbox": function Sandbox (require) {
-    var Core = require("Core"),
-        EventManager = require("EventManager");
+//TODO проблемма с Core
+"Sandbox": function (require) {
+    var Core = require("Core"), // тут коре пустой объект потому что первый вызов require в Core не завершился
+        EventManager = require("EventManager"); // корректный
 
     var uuid = 0;
 
@@ -10,16 +11,19 @@
      */
     var Sandbox = function (descriptor) {
         this.descriptor = descriptor || {};
-        this.namespace = this.descriptor.name + ++uuid;
+        console.log(3);
+        // если не добавить "" то при discriptor.name = undefined будет NaN
+        this.namespace = this.descriptor.name + "" + (++uuid);
     };
 
     /**
      *
-     * Возвращает HTMLElement модуля
+     * Возвращает контейнер модуля
      *
      * @return {HTMLElement|null}
      */
     Sandbox.prototype.getBox = function () {
+       // а тут коре таким каким он должен быть, потому что первый вызоз require завершился
         return Core.getBox(this.descriptor.name);
     };
 
@@ -61,6 +65,23 @@
     Sandbox.prototype.trigger = function (event, data) {
         EventManager.trigger(event, data);
         return this;
+    };
+
+    //TODO задокументировать
+    Sandbox.prototype.dom = {};
+
+    Sandbox.prototype.dom.getById = function (id) {
+        return Core.dom.getById(id);
+    };
+
+    Sandbox.prototype.dom.on = function (elem, event, callback) {
+        Core.dom.on(elem, event, callback);
+    };
+
+    Sandbox.prototype.event = {};
+
+    Sandbox.prototype.event.stop = function (e) {
+        Core.event.stop(e);
     };
 
     // exports
