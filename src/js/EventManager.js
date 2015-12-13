@@ -25,7 +25,6 @@
         eventsNs: {},
 
         /**
-         *
          * возвращает массив callbacks для выбранного eventNamespace или объект с namespace для выбранного eventName
          *
          * @param eventName
@@ -85,14 +84,16 @@
          * @returns {EventManager}
          */
         trigger: function (events, data, ns) {
+            console.log(ns);
             if (typeof events === "string") {
                 events = this._parseEventsString(events);
 
                 for (var i = 0, max = events.length, eventListNs, listOfCallbacks, eventName; i < max; i++) {
                     eventName = events[i];
-                    eventListNs = this._getEventListNs(eventName, null); // {"namespace" : [callbacks, ...], ...}
+                    eventListNs = this._getEventListNs(eventName); // {"namespace" : [callbacks, ...], ...}
 
                     for (var namespace in eventListNs) {
+                        // если ns == undefined запустить все обработчики события
                         if (ns && ns !== namespace) {
                             continue;
                         }

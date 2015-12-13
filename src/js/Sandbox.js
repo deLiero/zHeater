@@ -11,7 +11,7 @@
      */
     var Sandbox = function (descriptor) {
         this.descriptor = descriptor || {};
-        console.log(3);
+
         // если не добавить "" то при discriptor.name = undefined будет NaN
         this.namespace = this.descriptor.name + "" + (++uuid);
     };
@@ -28,7 +28,6 @@
     };
 
     /**
-     *
      * подписывает модуль на определённое событие
      *
      * @param {String}   event
@@ -65,6 +64,16 @@
     Sandbox.prototype.trigger = function (event, data) {
         EventManager.trigger(event, data);
         return this;
+    };
+
+    /**
+     * возвращает указанный ресурс модуля
+     *
+     * @param resource
+     * @return {*}
+     */
+    Sandbox.prototype.getResource = function (resource) {
+        return this.descriptor.resources[resource];
     };
 
     //TODO задокументировать

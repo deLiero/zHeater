@@ -5,7 +5,7 @@
 (function (window, sandboxed_modules) {
     var modules = {},//объект хранит в себе инициилизированные модули
         initialized_modules = {},
-    // задача require отдавать уже проинициализированный экземпляр
+        // задача require отдавать уже проинициализированный экземпляр
         require = function (moduleName) {
             var module = modules[moduleName],
                 output;
@@ -63,11 +63,11 @@
         }
     },
     "descriptors": {
-        "Form": {name: "Form"}
+        "Form": {name: "Form", resources: {inputs: {diameter: "D", height: "H", gap: "gap", thickness: "Tk"}}},
+        "Calculator": {name: "Calculator"}
     },
     //= Calculator.js
     //= Form.js
 })(function (require, exports, module) {
-    console.log(1);
     require("Core").init();
 }); // в качестве параметра передать ядро приложения

@@ -1,34 +1,30 @@
 "Form": function (require, exports, module) {
 
-
-    function form(sandbox) {
+    /**
+     * @param sandbox
+     * @constructor
+     */
+    function Form(sandbox) {
         var self = this;
         this.sandbox = sandbox;
-
         this.formElem = sandbox.getBox();
-
-        if (!form) {
-            return;
-        }
-
-        var self = this;
 
         this.inputs = {};
 
-        this.inputs.diameter = sandbox.dom.getById("D");
-        this.inputs.height = sandbox.dom.getById("H");
-        this.inputs.gap = sandbox.dom.getById("gap");
-        this.inputs.thickness = sandbox.dom.getById("Tk");
+        var inputs = this.sandbox.getResource("inputs");
+
+        this.inputs.diameter = sandbox.dom.getById(inputs.diameter);
+        this.inputs.height = sandbox.dom.getById(inputs.height);
+        this.inputs.gap = sandbox.dom.getById(inputs.gap);
+        this.inputs.thickness = sandbox.dom.getById(inputs.thickness);
 
         this.sandbox.bind("calculate:ready", function(e) {
             alert(e.data);
         });
 
-        //
         // Обработчик формы
-        // Генерирует событие form-ready
-        // В качестве аргументов события передает введенные данные
-        //
+        // Генерирует событие form:ready, либо form:error
+        // В качестве аргументов события form:ready передает введенные данные
         sandbox.dom.on(this.formElem, "submit", function (e) {
             sandbox.event.stop(e);
             try {
@@ -38,25 +34,29 @@
                 var Tk = parseFloat(self.inputs.thickness.value);
 
                 // проверка на валидность данных
-                if (isNaN(D) || isNaN(H) || isNaN(gap) || isNaN(Tk)) {
-                    alert("НЕ КОРРЕКТНЫЕ ДАННЫЕ!\n\n"
-                    + "Вн. диаметр: " + D +";\n" + "Высота заготовки: "
-                    + H +";\n" + "Зазор: "
-                    + gap +";\n" + "Толщина заготовки: "
-                    + Tk +";\n");
-                } else {
-                    alert("ДАННЫЕ!\n\n"
-                    + "Вн. диаметр: " + D +";\n" + "Высота заготовки: "
-                    + H +";\n" + "Зазор: "
-                    + gap +";\n" + "Толщина заготовки: "
-                    + Tk +";\n");
+                console.log(self.validate(D, H, gap, Tk));
+                if (self.validate(D, H, gap, Tk)) {
                     self.sandbox.trigger("form:ready", {d: D, h: H, g: gap, tk: Tk});
+                } else {
+                    self.sandbox.trigger("form:validate");
                 }
             } catch (err) {
                 console.error(err);
+                self.sandbox.trigger("form:error", err);
             }
         });
     }
 
-    return form;
+    /**
+     * @param d     внутренний диаметр корпуса
+     * @param h     высота корпуса
+     * @param g     зазор между трубой и воротником
+     * @param tk    толщина листа корпуса
+     * @return {boolean}
+     */
+    Form.prototype.validate = function (d, h, g, tk) {
+        return !(isNaN(d) || isNaN(h) || isNaN(g) || isNaN(tk));
+    };
+
+    return Form;
 }
