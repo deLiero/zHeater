@@ -84,7 +84,6 @@
          * @returns {EventManager}
          */
         trigger: function (events, data, ns) {
-            console.log(ns);
             if (typeof events === "string") {
                 events = this._parseEventsString(events);
 

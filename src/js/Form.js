@@ -1,3 +1,5 @@
+//TODO добавить валидацию (подсвечивать красным неверный ввод)
+
 "Form": function (require, exports, module) {
 
     /**
@@ -17,10 +19,6 @@
         this.inputs.height = sandbox.dom.getById(inputs.height);
         this.inputs.gap = sandbox.dom.getById(inputs.gap);
         this.inputs.thickness = sandbox.dom.getById(inputs.thickness);
-
-        this.sandbox.bind("calculate:ready", function(e) {
-            alert(e.data);
-        });
 
         // Обработчик формы
         // Генерирует событие form:ready, либо form:error
@@ -59,4 +57,4 @@
     };
 
     return Form;
-}
+},

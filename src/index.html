@@ -10,25 +10,41 @@
     <form id="form" class="form_" action="">
       <div class="_row">
         <label for="D">Внутренный диаметр</label>
-        <input id="D" class="_bar" type="text" name="diameter"/>
+        <input id="D" class="_bar" type="text" autocomplete="off" placeholder="мм" name="diameter"/>
       </div>
       <div class="_row">
         <label for="H">Высота заготовки</label>
-        <input id="H" type="text" name="height"/>
+        <input id="H" type="text" autocomplete="off" placeholder="мм" name="height"/>
       </div>
       <div class="_row">
         <label for="gap">Зазор</label>
-        <input id="gap" type="text" name="gap"/>
+        <input id="gap" type="text" autocomplete="off" placeholder="мм" name="gap"/>
       </div>
       <div class="_row">
         <label for="Tk">Толщина заготовки</label>
-        <input id="Tk" type="range" value="2.5" min="2" max="6" step="0.5" name="thickness"/>
+        <input id="Tk" type="text" autocomplete="off" placeholder="мм" name="thickness"/>
       </div>
-      <div class="_row">
-        <input type="reset" value="очистить"/>
-        <input type="submit" value="расчет"/>
+      <div class="_row -right -last">
+        <input class="_btn" type="reset" value="очистить"/>
+        <input class="_btn" type="submit" value="расчет"/>
       </div>
     </form>
+  </div>
+  <div id="printer" class="printer_">
+    <div class="_right">
+      <table id="table" class="_table">
+        <thead>
+        <tr>
+          <th>Свойство</th>
+          <th>Значение</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="_left"><img src="zHeater.png" alt="чертёж"></div>
   </div>
   <script src="js/main.js"></script>
 </body>

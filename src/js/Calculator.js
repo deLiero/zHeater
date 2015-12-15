@@ -1,3 +1,4 @@
+//TODO неверный расчет!! проверить!!
 "Calculator": function Calculator(require, exports, module) {
 
     Number.prototype._z_roundTo = function (n) {
@@ -199,6 +200,61 @@
         }
     }
 
+    // ДОПОЛНИТЕЛЬНЫЕ ПАРАМЕТРЫ
+    // НЕ ОПРЕДЕЛЯЮТ ЭКСПЛУАТАЦИОННЫЕ ХАРАКТЕРИСТИКИ
+
+    /**
+     * расстояние от верхнего края корпуса печки
+     * до врезки дымоходного патрубка и загрузочной дверцы
+     *
+     * @param h
+     * @param Tb
+     * @return {number}
+     * @private
+     */
+    function _i(h, Tb) {
+        return h + Tb + 20;
+    }
+
+    /**
+     * высота нижнего края загрузочной дверцы
+     * от нижнего края цилиндра
+     *
+     * @param Hf
+     * @param h
+     * @param Tb
+     * @return {number}
+     * @private
+     */
+    function _Hm(Hf, h, Tb) {
+        return Hf + h + Tb + 30;
+    }
+
+    /**
+     * высота загрузочной дверцы
+     *
+     * @param H
+     * @param Hf
+     * @param i
+     * @return {number}
+     * @private
+     */
+    function _hm(H, Hf, i) {
+        return (H - Hf - i)._z_roundTo(2);
+    }
+
+    /**
+     * высота дверцы
+     *
+     * @param h
+     * @param Tb
+     * @return {number}
+     * @private
+     */
+    function _ha(h, Tb) {
+        return h + Tb + 100;
+    }
+
     var p = Calculator.prototype;
 
     /**
@@ -209,6 +265,7 @@
     p.calculate = function () {7
         var result = {};
 
+        // расчет основных параметров
         result.D = this.D;
         result.H = this.H;
         result.Tk = this.Tk;
@@ -226,7 +283,13 @@
         result.L = _L(this.gap);
         result.q = _q(result.L);
 
-        this.sandbox.trigger("calculate:ready", "ВСЁ ОК! Смотри консоль!");
+        // расчет дополнительных параметров
+        result.i = _i(result.h, result.Tb);
+        result.Hm = _Hm(result.Hf, result.h, result.Tb);
+        result.hm = _hm(result.H, result.Hf, result.i);
+        result.ha = _ha(result.h, result.Tb);
+
+        this.sandbox.trigger("calculate:ready", result);
 
         return result;
     };

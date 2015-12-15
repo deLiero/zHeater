@@ -1,11 +1,27 @@
 .form_ {
-  background-color: #eee;
-  border: 1px solid #777;
+  border: 1px solid #4aa3df;
   color: #333;
-  padding: 10px;
+  padding: 20px;
 
   ._row {
     position: relative;
+    margin: 10px 0;
+
+    input[type=text] {
+      border: none;
+      border-bottom: 1px solid #aaa;
+      color: #aaa;
+      outline: none;
+      text-align: right;
+      font-size: 24px;
+      font-weight: bold;
+      transition: border 200ms ease-in;
+
+      &:focus {
+        border-bottom: 1px solid #333;
+        color: #333;
+      }
+    }
 
     input[type=text],
     input[type=range]{
@@ -17,6 +33,33 @@
       margin: 3px 0;
       padding-left: 5px;
       text-align: left;
+      text-transform: uppercase;
     }
+
+    ._btn {
+      background-color: #4aa3df;
+      border: 2px solid #4aa3df;
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 7px 15px;
+      outline: none;
+
+      &:hover {
+        border: 2px solid #2980b9;
+      }
+
+      &:active {
+        background-color: #2980b9;
+      }
+    }
+  }
+
+  ._row.-right {
+    text-align: right;
+  }
+
+  ._row.-last {
+    margin: 30px 0 0 0;
   }
 }

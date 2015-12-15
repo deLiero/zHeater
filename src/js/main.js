@@ -57,17 +57,20 @@
     //= EventManager.js
     //= Sandbox.js
     "descriptor": {
-        "modules": ["Form", "Calculator"],
+        "modules": ["Form", "Calculator", "Printer"],
         "layout": {
-            "Form": "form"
+            "Form": "form",
+            "Printer": "printer"
         }
     },
     "descriptors": {
         "Form": {name: "Form", resources: {inputs: {diameter: "D", height: "H", gap: "gap", thickness: "Tk"}}},
-        "Calculator": {name: "Calculator"}
+        "Calculator": {name: "Calculator"},
+        "Printer": {"name": "Printer", "resources": {"table": "table"}}
     },
     //= Calculator.js
     //= Form.js
+    //= Printer.js
 })(function (require, exports, module) {
     require("Core").init();
 }); // в качестве параметра передать ядро приложения
