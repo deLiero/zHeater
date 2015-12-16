@@ -1,4 +1,5 @@
 // core
+//TODO добавить небольшой модуль для работы с css
 "Core": function Core(require, exports) {
     var Sandbox      =  require("Sandbox"),
         EventManager =  require("EventManager");
