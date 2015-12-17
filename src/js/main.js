@@ -1,3 +1,18 @@
+//
+// Основные модули приложения
+//
+
+var zHeater = {};
+//= core.js
+//= EventManager.js
+//= Sandbox.js
+//= descriptor.js
+//= descriptors.js
+//= Calculator.js
+//= Form.js
+//= Printer.js
+//= Helper.js
+
 // startup
 // вызов func(a)(b)
 // где а - объект с компонентами
@@ -52,25 +67,6 @@
     window._r = require;
 
     return _;
-})(window, {"moduleName":true})({
-    //= core.js
-    //= EventManager.js
-    //= Sandbox.js
-    "descriptor": {
-        "modules": ["Form", "Calculator", "Printer"],
-        "layout": {
-            "Form": "form",
-            "Printer": "printer"
-        }
-    },
-    "descriptors": {
-        "Form": {name: "Form", resources: {inputs: {diameter: "D", height: "H", gap: "gap", thickness: "Tk"}}},
-        "Calculator": {name: "Calculator"},
-        "Printer": {"name": "Printer", "resources": {"table": "table"}}
-    },
-    //= Calculator.js
-    //= Form.js
-    //= Printer.js
-})(function (require, exports, module) {
+})(window, {"moduleName":true})(zHeater)(function (require, exports, module) {
     require("Core").init();
 }); // в качестве параметра передать ядро приложения

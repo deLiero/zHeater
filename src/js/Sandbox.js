@@ -1,5 +1,4 @@
-//TODO проблемма с Core
-"Sandbox": function (require) {
+zHeater["Sandbox"] = function (require) {
     var Core = require("Core"), // тут коре пустой объект потому что первый вызов require в Core не завершился
         EventManager = require("EventManager"); // корректный
 
@@ -95,4 +94,4 @@
 
     // exports
     return Sandbox;
-},
+};

@@ -4,7 +4,7 @@
 // внес небольшие изменения под свои нужды
 //
 
-"EventManager": function EventManager(require) {
+zHeater["EventManager"] =  function EventManager(require) {
 
     /**
      * @namespace
@@ -192,4 +192,4 @@
             return this;
         }
     }
-},
+};

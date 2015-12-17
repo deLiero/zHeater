@@ -1,5 +1,5 @@
 //TODO при наведении на переменные рисунка выводить их значения
-"Printer": function Printer (require) {
+zHeater["Printer"] = function Printer (require) {
     function _Printer(sandbox) {
         var self = this;
 
@@ -23,4 +23,4 @@
     }
 
     return _Printer;
-}
+};

@@ -1,6 +1,6 @@
 // core
 //TODO добавить небольшой модуль для работы с css
-"Core": function Core(require, exports) {
+zHeater["Core"] = function Core(require, exports) {
     var Sandbox      =  require("Sandbox"),
         EventManager =  require("EventManager");
 
@@ -169,4 +169,4 @@
     for (var i in coreExports) {
         exports[i] = coreExports[i];
     }
-},
+};

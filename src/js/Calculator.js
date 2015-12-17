@@ -1,5 +1,5 @@
 //TODO неверный расчет!! проверить!!
-"Calculator": function Calculator(require, exports, module) {
+zHeater["Calculator"] = function Calculator(require, exports, module) {
 
     Number.prototype._z_roundTo = function (n) {
         n = parseInt(n);
@@ -302,4 +302,4 @@
     };
 
     return Calculator;
-},
+};

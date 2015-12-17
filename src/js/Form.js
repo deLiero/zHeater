@@ -1,4 +1,4 @@
-"Form": function (require, exports, module) {
+zHeater["Form"] = function (require, exports, module) {
 
     /**
      * @param sandbox
@@ -49,6 +49,31 @@
             }
         });
 
+        //
+        // при фокусе инициировать событие
+        //
+        sandbox.dom.on(this.inputs.diameter, "focus", function (e) {
+            self.sandbox.trigger("form:focus-d");
+        });
+
+        sandbox.dom.on(this.inputs.height, "focus", function (e) {
+            self.sandbox.trigger("form:focus-h");
+        });
+
+        sandbox.dom.on(this.inputs.gap, "focus", function (e) {
+            self.sandbox.trigger("form:focus-g");
+        });
+
+        sandbox.dom.on(this.inputs.thickness, "focus", function (e) {
+            self.sandbox.trigger("form:focus-tk");
+        });
+
+        // как только модуль Helper загружен, взять в фокус поле diameter
+        sandbox.bind("helper:loaded", function () {
+            self.inputs.diameter.focus();
+            self.sandbox.trigger("form:focus-d");
+        });
+
         // Обработчик формы
         // Генерирует событие form:ready, либо form:error
         // В качестве аргументов события form:ready передает введенные данные
@@ -83,9 +108,6 @@
                 self.sandbox.trigger("form:error", err);
             }
         });
-
-        // при запуске, сфокусироваться на поле диаметра
-        this.inputs.diameter.focus();
     }
 
     /**
@@ -173,4 +195,4 @@
     };
 
     return Form;
-},
+};

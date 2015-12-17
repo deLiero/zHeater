@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>zHeater 0.2.0</title>
+  <title>zHeater 0.3.0</title>
   <link rel="stylesheet" href="style/main.css"/>
 </head>
 <body>
@@ -10,25 +10,28 @@
     <form id="form" class="form_" action="">
       <div class="_row">
         <label for="D">Внутренний диаметр</label>
-        <input id="D" class="_bar" type="text" autocomplete="off" placeholder="мм" name="diameter"/>
+        <input id="D" class="_bar" type="text" autocomplete="off" placeholder="D мм" name="diameter"/>
       </div>
       <div class="_row">
         <label for="H">Высота заготовки</label>
-        <input id="H" type="text" autocomplete="off" placeholder="мм" name="height"/>
+        <input id="H" type="text" autocomplete="off" placeholder="H мм" name="height"/>
       </div>
       <div class="_row">
         <label for="gap">Зазор</label>
-        <input id="gap" type="text" autocomplete="off" placeholder="мм" name="gap"/>
+        <input id="gap" type="text" autocomplete="off" placeholder="gap мм" name="gap"/>
       </div>
       <div class="_row">
         <label for="Tk">Толщина заготовки</label>
-        <input id="Tk" type="text" autocomplete="off" placeholder="мм" name="thickness"/>
+        <input id="Tk" type="text" autocomplete="off" placeholder="Tk мм" name="thickness"/>
       </div>
       <div class="_row -right -last">
         <input class="_btn" type="reset" value="очистить"/>
         <input class="_btn" type="submit" value="расчет"/>
       </div>
     </form>
+    <div id="helper" class="helper_">
+
+    </div>
   </div>
   <div id="printer" class="printer_">
     <div class="_right">
