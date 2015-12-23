@@ -1,4 +1,3 @@
-//TODO неверный расчет!! проверить!!
 zHeater["Calculator"] = function Calculator(require, exports, module) {
 
     Number.prototype._z_roundTo = function (n) {
@@ -132,7 +131,7 @@ zHeater["Calculator"] = function Calculator(require, exports, module) {
      * @private
      */
     function _mf() {
-        return 0.4;
+        return 0.403;
     }
 
     /**
@@ -160,15 +159,18 @@ zHeater["Calculator"] = function Calculator(require, exports, module) {
      * @returns {number}
      */
     function _h(D) {
-        if (300 <= D < 400) {
+        if (D < 300) {
+            return 40;
+        }
+        if (D >= 300 && D < 400) {
             return 40;
         }
 
-        if (400 <= D < 600) {
+        if (D >= 400 && D < 600) {
             return 50;
         }
 
-        if (600 <= D < 800) {
+        if (D >= 600 && D < 800) {
             return 60;
         }
 
@@ -183,15 +185,19 @@ zHeater["Calculator"] = function Calculator(require, exports, module) {
      * @returns {number}
      */
     function _Tb(D) {
-        if (D <= 300 || D < 400) {
+        if (D < 300) {
             return 8;
         }
 
-        if (D <= 400 || D < 800) {
+        if (D >= 300 && D < 400) {
+            return 8;
+        }
+
+        if (D >= 400 && D < 600) {
             return 6;
         }
 
-        if (D <= 600 || D < 800) {
+        if (D >= 600 && D < 800) {
             return 4;
         }
 
@@ -234,13 +240,14 @@ zHeater["Calculator"] = function Calculator(require, exports, module) {
      * высота загрузочной дверцы
      *
      * @param H
-     * @param Hf
+     * @param Hm
      * @param i
      * @return {number}
      * @private
      */
-    function _hm(H, Hf, i) {
-        return (H - Hf - i)._z_roundTo(2);
+    function _hm(H, Hm, i) {
+        // в оригинале H - Hf - i
+        return (H - Hm - i)._z_roundTo(2);
     }
 
     /**
@@ -262,7 +269,7 @@ zHeater["Calculator"] = function Calculator(require, exports, module) {
      * Генерирует событие calculate-ready
      * @returns {Object}
      */
-    p.calculate = function () {7
+    p.calculate = function () {
         var result = {};
 
         // расчет основных параметров
@@ -286,7 +293,7 @@ zHeater["Calculator"] = function Calculator(require, exports, module) {
         // расчет дополнительных параметров
         result.i = _i(result.h, result.Tb);
         result.Hm = _Hm(result.Hf, result.h, result.Tb);
-        result.hm = _hm(result.H, result.Hf, result.i);
+        result.hm = _hm(result.H, result.Hm, result.i);
         result.ha = _ha(result.h, result.Tb);
 
         this.sandbox.trigger("calculate:ready", result);
