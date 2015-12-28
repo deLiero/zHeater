@@ -157,7 +157,7 @@ zHeater["Core"] = function Core(require, exports) {
         init:          bind(Core.init, Core),
         destroyModule: bind(Core.destroyModule, Core),
         initModule:    bind(Core.initModule, Core),
-        getBox:        bind(Core.getBox, Core),
+        getBox:        bind(Core.getBox, Core)
     };
 
     coreExports.dom = Core.dom;

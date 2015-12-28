@@ -57,10 +57,24 @@ zHeater["Printer"] = function Printer (require) {
         //});
 
         this.sandbox.dom.on(this.box, "click", function (e) {
-            self.box.style.display = "none";
+            self.closeAndUnbind();
         });
 
+        this.sandbox.dom.on(this.box, "keyup", function (e) {
+            console.log("press");
+        });
+
+
         this.sandbox.bind("calculate:ready", function(e) {
+
+            // при показе убрать фокус с формы
+            self.box.focus();
+
+            self.sandbox.bind("common:esc-up", function(e) {
+                self.closeAndUnbind();
+            });
+
+            document.body.style.overflow = "hidden";
             self.box.style.display = "block";
             var string = "";
             self.result = e.data;
@@ -70,6 +84,12 @@ zHeater["Printer"] = function Printer (require) {
             self.tBody.innerHTML = string;
         });
     }
+
+    _Printer.prototype.closeAndUnbind = function () {
+        this.box.style.display = "none";
+        document.body.style.overflow = "";
+        this.sandbox.unbind("common:esc-up");
+    };
 
     return _Printer;
 };

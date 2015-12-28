@@ -8,6 +8,7 @@ var zHeater = {};
 //= Sandbox.js
 //= descriptor.js
 //= descriptors.js
+//= Common.js
 //= Calculator.js
 //= Form.js
 //= Printer.js

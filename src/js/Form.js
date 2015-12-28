@@ -79,6 +79,11 @@ zHeater["Form"] = function (require, exports, module) {
         // В качестве аргументов события form:ready передает введенные данные
         sandbox.dom.on(this.formElem, "submit", function (e) {
             sandbox.event.stop(e);
+            console.log("input");
+            //снять фокусы с полей ввода
+            for (var key in self.inputs) {
+                self.inputs[key].blur();
+            }
             try {
                 var D = parseInt(self.inputs.diameter.value);
                 var H = parseInt(self.inputs.height.value);
@@ -88,6 +93,7 @@ zHeater["Form"] = function (require, exports, module) {
                 // проверка на валидность данных
                 if (self.validate(D, H, gap, Tk)) {
                     self.sandbox.trigger("form:ready", {d: D, h: H, g: gap, tk: Tk});
+                    self.formElem.blur(); // убрать фокус
                 } else {
                     if (!self.checkInput(self.inputs.diameter.value,"int")) {
                         self.highlightInput("diameter");

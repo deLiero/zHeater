@@ -1,5 +1,5 @@
 zHeater["descriptor"] = {
-    "modules": ["Form", "Calculator", "Printer", "Helper"],
+    "modules": ["Common", "Form", "Calculator", "Printer", "Helper"],
         "layout": {
         "Form": "form",
             "Printer": "printer",
