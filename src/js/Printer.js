@@ -60,28 +60,30 @@ zHeater["Printer"] = function Printer (require) {
             self.closeAndUnbind();
         });
 
-        this.sandbox.dom.on(this.box, "keyup", function (e) {
-            console.log("press");
-        });
-
-
         this.sandbox.bind("calculate:ready", function(e) {
 
-            // при показе убрать фокус с формы
-            self.box.focus();
+            // если нет tabindex то присвоить
+            if (!self.box.getAttribute("tabindex")) {
+                self.box.setAttribute("tabindex", "-1");
+            }
 
-            self.sandbox.bind("common:esc-up", function(e) {
+            // добавить обработчик кнопки ESC
+            self.sandbox.bind("common:keyup:esc", function(e) {
                 self.closeAndUnbind();
             });
 
             document.body.style.overflow = "hidden";
-            self.box.style.display = "block";
+
             var string = "";
             self.result = e.data;
             for (var key in e.data) {
                 string += "<tr><td>" + key + "</td><td>" + e.data[key] + "</td></tr>";
             }
             self.tBody.innerHTML = string;
+
+            // как содержимое будет готово, отобразить и взять в фокус
+            self.box.style.display = "block";
+            self.box.focus();
         });
     }
 

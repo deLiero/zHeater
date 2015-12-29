@@ -20,10 +20,9 @@ zHeater["Calculator"] = function Calculator(require, exports, module) {
         this.Tk = prop.Tk || 0;    //толщина листа корпуса (input)
         this.gap = prop.gap || 0;  //зазор между трубой и воротником ( не более 2,5мм) (input)
 
-        var self = this;
-
         this.sandbox.bind("form:ready", function (e) {
             self.setup(e.data.d, e.data.h, e.data.g, e.data.tk);
+            //TODO Remove
             console.log(self.calculate());
         });
     };
