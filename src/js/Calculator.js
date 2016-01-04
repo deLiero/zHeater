@@ -217,7 +217,7 @@ zHeater["Calculator"] = function Calculator(require, exports, module) {
      * @private
      */
     function _i(h, Tb) {
-        return h + Tb + 20;
+        return (h + Tb + 20)._z_roundTo(2);
     }
 
     /**
@@ -231,7 +231,7 @@ zHeater["Calculator"] = function Calculator(require, exports, module) {
      * @private
      */
     function _Hm(Hf, h, Tb) {
-        return Hf + h + Tb + 30;
+        return (Hf + h + Tb + 30)._z_roundTo(2);
     }
 
     /**
@@ -257,7 +257,7 @@ zHeater["Calculator"] = function Calculator(require, exports, module) {
      * @private
      */
     function _ha(h, Tb) {
-        return h + Tb + 100;
+        return (h + Tb + 100)._z_roundTo(2);
     }
 
     var p = Calculator.prototype;
