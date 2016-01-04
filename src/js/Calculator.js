@@ -22,8 +22,7 @@ zHeater["Calculator"] = function Calculator(require, exports, module) {
 
         this.sandbox.bind("form:ready", function (e) {
             self.setup(e.data.d, e.data.h, e.data.g, e.data.tk);
-            //TODO Remove
-            console.log(self.calculate());
+            self.calculate();
         });
     };
 

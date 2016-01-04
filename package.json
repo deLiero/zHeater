@@ -1,6 +1,6 @@
 {
   "name": "zheater",
-  "version": "0.3.0",
+  "version": "1.0.0rc",
   "description": "расчет печи",
   "main": "gulpfile.js",
   "scripts": {

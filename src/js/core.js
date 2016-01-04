@@ -1,5 +1,4 @@
 // core
-//TODO добавить небольшой модуль для работы с css
 zHeater["Core"] = function Core(require, exports) {
     var Sandbox      =  require("Sandbox"),
         EventManager =  require("EventManager");
@@ -99,7 +98,7 @@ zHeater["Core"] = function Core(require, exports) {
          *
          * получает DOM элемент модуля
          *
-         * @param name
+         * @param  {String}             name
          * @return {HTMLElement|null}
          */
         getBox: function (name) {
@@ -120,7 +119,7 @@ zHeater["Core"] = function Core(require, exports) {
              *
              * возвращает елемент соответвующий id
              *
-             * @param id
+             * @param {String}  id
              * @return {HTMLElement|null}
              */
             getById: function (id) {
@@ -130,14 +129,35 @@ zHeater["Core"] = function Core(require, exports) {
                     return null;
                 }
             },
-            //TODO задокументировать
+            /**
+             *
+             * подписывает elem на событие eventName
+             *
+             * @param {HTMLElement} elem
+             * @param {String}      eventName
+             * @param {Function}    callback
+             */
             on: function (elem, eventName, callback) {
+                if (!callback) {
+                    return;
+                }
                 elem.addEventListener(eventName, callback, true);
             }
         },
 
-        //TODO задокументировать
+        /**
+         *
+         * Объект с методами для работы с event
+         *
+         * @type Object
+         */
         event: {
+            /**
+             *
+             * отменяет дейстие по умолчанию
+             *
+             * @param {Event} e
+             */
             stop: function (e) {
                 if (e.preventDefault) {
                     e.preventDefault();
@@ -163,10 +183,9 @@ zHeater["Core"] = function Core(require, exports) {
     coreExports.dom = Core.dom;
     coreExports.event = Core.event;
 
-    //TODO delete coreExports._sb
-    coreExports._sb = Core.sandboxes;
-
     for (var i in coreExports) {
-        exports[i] = coreExports[i];
+        if (coreExports.hasOwnProperty(i)) {
+            exports[i] = coreExports[i];
+        }
     }
 };

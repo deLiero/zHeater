@@ -1,7 +1,7 @@
 .printer_ {
   background: #fff;
   display: none;
-  position: fixed;
+  position: absolute;
   overflow-x: hidden;
   overflow-y: auto;
   top: 0;
@@ -24,9 +24,29 @@
     position: absolute;
     top: 0;
     right: 0;
+    width: 200px;
+
+    table {
+      width: 100%;
+    }
   }
 
   ._left {
     position: relative;
+    margin-right: 220px;
+  }
+
+  ._wrapper {
+    padding: 10px 0;
+  }
+  ._wrapper a {
+    color: #2B587A;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

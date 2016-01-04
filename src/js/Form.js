@@ -78,9 +78,6 @@ zHeater["Form"] = function (require, exports, module) {
         // Генерирует событие form:ready, либо form:error
         // В качестве аргументов события form:ready передает введенные данные
         sandbox.dom.on(this.formElem, "submit", function (e) {
-            //TODO delete this
-            console.log("submit");
-
             try {
                 var D = parseInt(self.inputs.diameter.value);
                 var H = parseInt(self.inputs.height.value);
@@ -90,22 +87,21 @@ zHeater["Form"] = function (require, exports, module) {
                 // проверка на валидность данных
                 if (self.validate(D, H, gap, Tk)) {
                     self.sandbox.trigger("form:ready", {d: D, h: H, g: gap, tk: Tk});
-                } else {
-                    if (!self.checkInput(self.inputs.diameter.value,"int")) {
-                        self.highlightInput("diameter");
-                    }
-                    if (!self.checkInput(self.inputs.height.value,"int")) {
-                        self.highlightInput("height");
-                    }
-                    if (!self.checkInput(self.inputs.gap.value,"float")) {
-                        self.highlightInput("gap");
-                    }
-                    if (!self.checkInput(self.inputs.thickness.value,"float")) {
-                        self.highlightInput("thickness");
-                    }
-                    self.sandbox.trigger("form:validateError");
+                } else if (!self.checkInput(self.inputs.diameter.value, "int")) {
+                    self.highlightInput("diameter");
                 }
+                if (!self.checkInput(self.inputs.height.value, "int")) {
+                    self.highlightInput("height");
+                }
+                if (!self.checkInput(self.inputs.gap.value, "float")) {
+                    self.highlightInput("gap");
+                }
+                if (!self.checkInput(self.inputs.thickness.value, "float")) {
+                    self.highlightInput("thickness");
+                }
+                self.sandbox.trigger("form:validateError");
             } catch (err) {
+                console.log("try/catch");
                 console.error(err);
                 self.sandbox.trigger("form:error", err);
             }

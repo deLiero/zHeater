@@ -75,19 +75,52 @@ zHeater["Sandbox"] = function (require) {
         return this.descriptor.resources[resource];
     };
 
-    //TODO задокументировать
+    /**
+     *
+     * Объект с методами dom
+     *
+     * @type {Object}
+     */
     Sandbox.prototype.dom = {};
 
+    /**
+     *
+     * Возвращает элемент с указанным id
+     *
+     * @param {String} id
+     *
+     * @return {*|HTMLElement|null}
+     */
     Sandbox.prototype.dom.getById = function (id) {
         return Core.dom.getById(id);
     };
 
-    Sandbox.prototype.dom.on = function (elem, event, callback) {
-        Core.dom.on(elem, event, callback);
+    /**
+     *
+     * подписывает elem на событие eventName
+     *
+     * @param {HTMLElement} elem
+     * @param {String}      eventName
+     * @param {Function}    callback
+     */
+    Sandbox.prototype.dom.on = function (elem, eventName, callback) {
+        Core.dom.on(elem, eventName, callback);
     };
 
+    /**
+     *
+     * Объект с методами событий
+     *
+     * @type {Object}
+     */
     Sandbox.prototype.event = {};
 
+    /**
+     *
+     * отменяет дейстие по умолчанию
+     *
+     * @param {Event} e
+     */
     Sandbox.prototype.event.stop = function (e) {
         Core.event.stop(e);
     };

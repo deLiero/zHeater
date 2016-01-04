@@ -31,8 +31,6 @@ var zHeater = {};
                 return module;
             }
 
-            //TODO if module == string => eval(module) in global scope (Indirect eval call);
-
             output = {exports: {}};
             initialized_modules[moduleName] = 1;
             modules[moduleName] = output.exports;
@@ -62,10 +60,6 @@ var zHeater = {};
         }
         return _;
     };
-
-    //TODO delete window._m, window._r
-    window._m = modules;
-    window._r = require;
 
     return _;
 })(window, {"moduleName":true})(zHeater)(function (require, exports, module) {
